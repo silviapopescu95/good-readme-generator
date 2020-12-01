@@ -3,8 +3,10 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const util = require("util");
 
+// Writes the file
 const writeFileAsync = util.promisify(fs.writeFile);
 
+// Prompts user with a series of questions to build README.md file
 function promptUser() {
     return inquirer.prompt([
         {
@@ -16,6 +18,11 @@ function promptUser() {
             type: "input",
             name: "description",
             message: "Enter a description of your project: "
+        }, 
+        {
+            type: "input",
+            name: "install",
+            message: "Enter installation instructions for your project: "
         }, 
         {
             type: "input",
@@ -37,10 +44,9 @@ function promptUser() {
             message: "Choose the license for your application from the list below: ",
             name: "license",
             choices: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "BSD",
+                "MIT",
+                "GPL"
             ]
         },
         {
@@ -56,11 +62,46 @@ function promptUser() {
     ]);
 }
 
-function generateMarkdown(answers) {
 
+function generateMarkdown(answers) {
+return `
+# ${answers.title}
+
+## Description
+${answers.description}
+
+## Table of Contents
+${ /* make a table of contents with working links here */ ''}
+[Go to Installation Instructions](#installation-instructions)
+[Go to Usage Information](#usage-information)
+[Go to Contribution Guidelines](#contribution-guidelines)
+[Go to Test Instructions](#test-instructions)
+[Go to License](#license)
+[Questions?](#questions)
+
+## Installation Instructions
+${answers.install}
+
+## Usage Information
+${answers.usage}
+
+## Contribution Guidelines
+${answers.contribution}
+
+## Test Instructions
+${answers.test}
+
+## License
+${answers.license}
+
+## Questions?
+View the source code here: [Go to GitHub](https://github.com/${answers.username})
+For any additional questions regarding this application, please contact me at: ${answers.email}
+`
 }
 
-prompt()
+
+promptUser()
 .then(function(answers) {
     const markdown = generateMarkdown(answers);
 

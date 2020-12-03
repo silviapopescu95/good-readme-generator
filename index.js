@@ -46,7 +46,7 @@ function promptUser() {
             choices: [
                 "BSD",
                 "MIT",
-                "GPL"
+                "Mozilla Public License 2.0"
             ]
         },
         {
@@ -62,6 +62,15 @@ function promptUser() {
     ]);
 }
 
+function generateLicenseBadge(licenseInput) {
+    if (licenseInput === "BSD") {
+        return `[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)`
+    } else if (licenseInput === "MIT") {
+        return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+    } else {
+        return `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
+    }
+}
 
 function generateMarkdown(answers) {
 return `
@@ -72,12 +81,12 @@ ${answers.description}
 
 ## Table of Contents
 ${ /* make a table of contents with working links here */ ''}
-[Go to Installation Instructions](#installation-instructions)
-[Go to Usage Information](#usage-information)
-[Go to Contribution Guidelines](#contribution-guidelines)
-[Go to Test Instructions](#test-instructions)
-[Go to License](#license)
-[Questions?](#questions)
+- [Go to Installation Instructions](#installation-instructions)
+- [Go to Usage Information](#usage-information)
+- [Go to Contribution Guidelines](#contribution-guidelines)
+- [Go to Test Instructions](#test-instructions)
+- [Go to License](#license)
+- [Questions?](#questions)
 
 ## Installation Instructions
 ${answers.install}
@@ -92,12 +101,12 @@ ${answers.contribution}
 ${answers.test}
 
 ## License
-${answers.license}
+${generateLicenseBadge(answers.license)};
+- This application is licensed under ${answers.license}.
 
 ## Questions?
 View the source code here: [Go to GitHub](https://github.com/${answers.username})
-For any additional questions regarding this application, please contact me at: ${answers.email}
-`
+For any additional questions regarding this application, please contact me at: ${answers.email}`;
 }
 
 

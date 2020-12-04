@@ -1,5 +1,7 @@
-
 # Good README Generator
+Example of generator:
+![](README-example.gif)
+
 
 ## Description
 This application will generate a README.md file for your application.

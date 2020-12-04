@@ -80,7 +80,6 @@ return `
 ${answers.description}
 
 ## Table of Contents
-${ /* make a table of contents with working links here */ ''}
 - [Go to Installation Instructions](#installation-instructions)
 - [Go to Usage Information](#usage-information)
 - [Go to Contribution Guidelines](#contribution-guidelines)
@@ -106,7 +105,8 @@ ${generateLicenseBadge(answers.license)};
 
 ## Questions?
 View the source code here: [Go to GitHub](https://github.com/${answers.username})
-For any additional questions regarding this application, please contact me at: ${answers.email}`;
+For any additional questions regarding this application, please contact me at: ${answers.email}
+`;
 }
 
 
